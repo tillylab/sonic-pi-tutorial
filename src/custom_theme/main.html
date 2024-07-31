@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="description" content="Sonic Pi Tutorial - Learn how to code music." />
+  <meta name="keywords" content="live coding music code programming learn teach tutorial" />
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.scrolly.min.js"></script>
+  <script src="js/skel.min.js"></script>
+  <script src="js/init.js"></script>
+
+  <link rel="stylesheet" href="css/skel.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/doc-styles.css" type="text/css" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script src="js/highlight.min.js"></script>
+
+  <!-- script for clipboard -->
+  <script src="js/clipboard.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+
+    if (Clipboard.isSupported()) {
+      $(document).ready(function () {
+        var pres = $('#contentss pre code');
+
+        for (var i = 0; i < pres.length; i++) {
+          var button = document.createElement('button');
+          var newid = 'code-snippet-' + i;
+          pres[i].id = newid
+          button.className = 'copy-button';
+          button.textContent = 'Copy';
+          button.setAttribute("data-clipboard-target", "#" + newid);
+          pres[i].parentElement.appendChild(button);
+        }
+        var clipboard = new Clipboard('.copy-button')
+      });
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <div id="listingg">
+    <ul class="toc top-level">
+      <li><a href="#section-01">1 Willkommen bei Sonic Pi</a></li>
+      <ul class="toc">
+        <li><a href="#section-01-1">1.1 Live-Coding</a></li>
+        <li><a href="#section-01-2">1.2 Die Programmoberfläche von Sonic Pi</a></li>
+        <li><a href="#section-01-3">1.3 Lernen durch Spielen</a></li>
+      </ul>
+      <li><a href="#section-02">2 Synthesizer</a></li>
+      <ul class="toc">
+        <li><a href="#section-02-1">2.1 Deine ersten Beeps</a></li>
+        <li><a href="#section-02-2">2.2 Synth-Optionen</a></li>
+        <li><a href="#section-02-3">2.3 Synths wechseln</a></li>
+        <li><a href="#section-02-4">2.4 Dauer bei Hüllkurven</a></li>
+      </ul>
+      <li><a href="#section-03">3 Samples</a></li>
+      <ul class="toc">
+        <li><a href="#section-03-1">3.1 Samples ansteuern</a></li>
+        <li><a href="#section-03-2">3.2 Sample-Parameter</a></li>
+        <li><a href="#section-03-3">3.3 Samples dehnen</a></li>
+        <li><a href="#section-03-4">3.4 Samples mit Hüllkurven</a></li>
+        <li><a href="#section-03-5">3.5 Teil-Samples</a></li>
+        <li><a href="#section-03-6">3.6 Externe Samples</a></li>
+        <li><a href="#section-03-7">3.7 Sample-Pakete</a></li>
+      </ul>
+      <li><a href="#section-04">4 Zufälligkeit</a></li>
+      <li><a href="#section-05">5 Programmstrukturen</a></li>
+      <ul class="toc">
+        <li><a href="#section-05-1">5.1 Blöcke</a></li>
+        <li><a href="#section-05-2">5.2 Wiederholung und Schleifen</a></li>
+        <li><a href="#section-05-3">5.3 Bedingungen</a></li>
+        <li><a href="#section-05-4">5.4 Threads</a></li>
+        <li><a href="#section-05-5">5.5 Funktionen</a></li>
+        <li><a href="#section-05-6">5.6 Variablen</a></li>
+        <li><a href="#section-05-7">5.7 Threads synchronisieren</a></li>
+      </ul>
+      <li><a href="#section-06">6 Effekte</a></li>
+      <ul class="toc">
+        <li><a href="#section-06-1">6.1 Effekte hinzufügen</a></li>
+        <li><a href="#section-06-2">6.2 Praktische Anwendung von Effekten</a></li>
+      </ul>
+      <li><a href="#section-07">7 Steuerung</a></li>
+      <ul class="toc">
+        <li><a href="#section-07-1">7.1 Steuerung laufender Synths</a></li>
+        <li><a href="#section-07-2">7.2 Steuerung von Effekten</a></li>
+        <li><a href="#section-07-3">7.3 Gleitende Parameter</a></li>
+      </ul>
+      <li><a href="#section-08">8 Datenstrukturen</a></li>
+      <ul class="toc">
+        <li><a href="#section-08-1">8.1 Listen</a></li>
+        <li><a href="#section-08-2">8.2 Akkorde</a></li>
+        <li><a href="#section-08-3">8.3 Skalen</a></li>
+        <li><a href="#section-08-4">8.4 Ringe</a></li>
+        <li><a href="#section-08-5">8.5 Ring-Ketten</a></li>
+      </ul>
+      <li><a href="#section-09">9 Live-Coding</a></li>
+      <ul class="toc">
+        <li><a href="#section-09-1">9.1 Live-Coding: Grundlagen</a></li>
+        <li><a href="#section-09-2">9.2 Live-Loops</a></li>
+        <li><a href="#section-09-3">9.3 Mehrere Live-Loops</a></li>
+        <li><a href="#section-09-4">9.4 Ticks verwenden</a></li>
+      </ul>
+      <li><a href="#section-10">10 Time-State (Stand der Zeit)</a></li>
+      <ul class="toc">
+        <li><a href="#section-10-1">10.1 Set und Get</a></li>
+        <li><a href="#section-10-2">10.2 Synchronisation</a></li>
+        <li><a href="#section-10-3">10.3 Muster-Abgleich</a></li>
+      </ul>
+      <li><a href="#section-11">11 MIDI</a></li>
+      <ul class="toc">
+        <li><a href="#section-11-1">11.1 MIDI In</a></li>
+        <li><a href="#section-11-2">11.2 MIDI-Ausgabe</a></li>
+      </ul>
+      <li><a href="#section-12">12 OSC</a></li>
+      <ul class="toc">
+        <li><a href="#section-12-1">12.1 OSC empfangen</a></li>
+        <li><a href="#section-12-2">12.2 OSC senden</a></li>
+      </ul>
+      <li><a href="#section-13">13 Multikanal-Audio</a></li>
+      <ul class="toc">
+        <li><a href="#section-13-1">13.1 Sound-In</a></li>
+        <li><a href="#section-13-2">13.2 Live-Audio</a></li>
+        <li><a href="#section-13-3">13.3 Sound-Out</a></li>
+      </ul>
+      <li><a href="#section-99">Abschließendes</a></li>
+      <li><a href="#section-A">A Anhang A - Artikel aus MagPi</a></li>
+      <ul class="toc">
+        <li><a href="#section-A-01">A.1 Tipps zu Sonic Pi</a></li>
+        <li><a href="#section-A-02">A.2 Live Coding</a></li>
+        <li><a href="#section-A-03">A.3 Kodierte Beats</a></li>
+        <li><a href="#section-A-04">A.4 Synth Riffs</a></li>
+        <li><a href="#section-A-05">A.5 Acid Bass</a></li>
+        <li><a href="#section-A-06">A.6 Musisches Minecraft</a></li>
+        <li><a href="#section-A-07">A.7 Bizet Beats</a></li>
+        <li><a href="#section-A-08">A.8 Werde ein Minecraft VJ</a></li>
+        <li><a href="#section-A-09">A.9 Zufälligkeit</a></li>
+        <li><a href="#section-A-10">A.10 Steuerung</a></li>
+        <li><a href="#section-A-11">A.11 Tick Tock</a></li>
+        <li><a href="#section-A-12">A.12 Sample Slicing</a></li>
+        <li><a href="#section-A-13">A.13 Code a Probabilistic Sequencer</a></li>
+        <li><a href="#section-A-14">A.14 Amplitudenmodulation</a></li>
+        <li><a href="#section-A-15">A.15 Five Live Coding Techniques</a></li>
+        <li><a href="#section-A-16">A.16 How to Practice Live Coding</a></li>
+        <li><a href="#section-A-17">A.17 Sample Stretching</a></li>
+        <li><a href="#section-A-18">A.18 Sound Design - Additive Synthesis</a></li>
+        <li><a href="#section-A-19">A.19 Sound Design - Subtractive Synthesis</a></li>
+        <li><a href="#section-A-20">A.20 Creative coding in the classroom with Sonic Pi</a></li>
+      </ul>
+      <li><a href="#section-B">Unentbehrliche Kenntnisse</a></li>
+      <ul class="toc">
+        <li><a href="#section-B-01">10.1 Tastaturkürzel</a></li>
+        <li><a href="#section-B-02">10.2 Cheatsheet für Tastaturkürzel</a></li>
+        <li><a href="#section-B-03">10.3 Teilen</a></li>
+        <li><a href="#section-B-04">10.4 Auftritte</a></li>
+      </ul>
+    </ul>
+  </div>
+
+  <div id="contentss">
+    <span class="image fit"><img src="images/sonic-pi-logo.png" alt="" /></span>
+    {{ page.content }}
+  </div>
+
+  <div id="doc-footer">
+    <p id="doc-version"> Sonic Pi Tutorial v3.2 </p>
+  </div>
+
+</body>
+
+</html>

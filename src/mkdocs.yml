@@ -1,0 +1,8 @@
+site_name: Raspberry-Pi Tutorial
+docs_dir: ../build/tutorial-de-onefile
+site_dir: ../site
+theme:
+  name: null
+  custom_dir: custom_theme
+markdown_extensions:
+  - attr_list
